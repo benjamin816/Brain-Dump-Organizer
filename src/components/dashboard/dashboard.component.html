@@ -1,0 +1,56 @@
+<div class="space-y-8">
+  <section>
+    <h2 class="text-2xl font-bold mb-4 text-gray-200 border-b-2 border-gray-700 pb-2">Today</h2>
+    <div class="space-y-4">
+      @for (item of todayItems(); track item.id) {
+        <app-brain-dump-item [item]="item" />
+      } @empty {
+        <p class="text-gray-500 italic">Nothing for today. Add a new brain dump!</p>
+      }
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-bold mb-4 text-gray-200 border-b-2 border-gray-700 pb-2">This Week</h2>
+    <div class="space-y-4">
+      @for (item of weekItems(); track item.id) {
+        <app-brain-dump-item [item]="item" />
+      } @empty {
+        <p class="text-gray-500 italic">Nothing for this week.</p>
+      }
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-bold mb-4 text-gray-200 border-b-2 border-gray-700 pb-2">This Month</h2>
+    <div class="space-y-4">
+      @for (item of monthItems(); track item.id) {
+        <app-brain-dump-item [item]="item" />
+      } @empty {
+        <p class="text-gray-500 italic">Nothing for this month.</p>
+      }
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-bold mb-4 text-gray-200 border-b-2 border-gray-700 pb-2">Someday</h2>
+    <div class="space-y-4">
+      @for (item of somedayItems(); track item.id) {
+        <app-brain-dump-item [item]="item" />
+      } @empty {
+        <p class="text-gray-500 italic">Nothing for someday.</p>
+      }
+    </div>
+  </section>
+  
+  <section>
+      <h2 class="text-2xl font-bold mb-4 text-gray-400 border-b-2 border-gray-700 pb-2">Recently Completed</h2>
+      <div class="space-y-4">
+          @for (item of doneItems(); track item.id) {
+              <app-brain-dump-item [item]="item" />
+          } @empty {
+              <p class="text-gray-500 italic">No completed items yet.</p>
+          }
+      </div>
+  </section>
+</div>

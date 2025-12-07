@@ -1,0 +1,48 @@
+@if (item(); as item) {
+  <div 
+    class="bg-gray-800 rounded-lg shadow-md p-4 border-l-4 transition-all duration-200 hover:shadow-lg hover:bg-gray-700/50"
+    [class]="priorityClass()"
+    [class.opacity-50]="item.done_at"
+  >
+    <div class="flex justify-between items-start">
+      <p class="font-semibold text-gray-100 flex-1 pr-4" [class.line-through]="item.done_at">{{ item.ai_normalized_text }}</p>
+      <div class="flex items-center space-x-2 flex-shrink-0">
+        @if (item.ai_event_json?.should_create_event) {
+          <button (click)="sendToCalendar()" class="p-1 text-gray-400 hover:text-blue-400" title="Send to Calendar">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        }
+        @if (!item.done_at) {
+          <button (click)="markDone()" class="p-1 text-gray-400 hover:text-green-400" title="Mark as Done">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </button>
+        } @else {
+           <button (click)="unmarkDone()" class="p-1 text-gray-400 hover:text-yellow-400" title="Mark as Not Done">
+             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+           </button>
+        }
+      </div>
+    </div>
+    <div class="mt-3 flex justify-between items-center text-sm">
+      <div class="flex items-center gap-2 flex-wrap">
+        @for (label of item.ai_labels; track label) {
+          <span class="px-2 py-0.5 bg-gray-700 text-gray-300 rounded-full text-xs">{{ label }}</span>
+        }
+      </div>
+      @if(getDueDate(); as dueDate) {
+        <div class="flex items-center text-gray-400">
+           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+            </svg>
+            <span>{{ dueDate }}</span>
+        </div>
+      }
+    </div>
+  </div>
+}
