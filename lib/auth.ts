@@ -1,7 +1,6 @@
-// FIX: The combined import for the default export `NextAuth` and the type `NextAuthConfig` can cause module resolution issues.
-// Splitting them into separate import statements is a robust fix.
-// FIX: The split import for 'NextAuthConfig' causes a module resolution error. Combining it with the default 'NextAuth' import resolves the issue.
-import NextAuth, { type NextAuthConfig } from 'next-auth';
+// FIX: Split the import of NextAuth and NextAuthConfig to resolve a potential module resolution issue.
+import NextAuth from 'next-auth';
+import type { NextAuthConfig } from 'next-auth';
 import Google from 'next-auth/providers/google';
 
 export const config = {
